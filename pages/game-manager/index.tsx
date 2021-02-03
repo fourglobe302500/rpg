@@ -11,7 +11,7 @@ interface GameManagerProps {}
 
 const GameManager: React.FC<GameManagerProps> = ({}) => {
   const [text, setText] = useState("");
-  const planesIds = useSelector(selectPlanesIds);
+  const planesIds = useSelector(selectPlanesIds());
   const dispatch = useDispatch();
   return (
     <>

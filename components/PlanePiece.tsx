@@ -4,18 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../store";
 import { deletePlane, togglePlaneLockState } from "../store/planeSlice";
 import styles from "../styles/styles.module.css";
+import { selectScenesId } from "../utils/selectors";
+import { ScenePiece } from "./ScenePiece";
 
 interface PlanePieceProps {
   planeId: number;
 }
 
 export const PlanePiece: React.FC<PlanePieceProps> = ({ planeId }) => {
-  const plane = useSelector(
-    (state: AppState) =>
-      state.planes.filter((plane) => plane.id === planeId)[0],
+  const plane = useSelector((state: AppState) =>
+    state.planes.find((plane) => plane.id === planeId),
   );
   const dispatch = useDispatch();
-  return (
+  const scenesIds = useSelector(selectScenesId(planeId));
+  return !plane ? null : (
     <div
       style={{
         width: "90%",
@@ -63,7 +65,11 @@ export const PlanePiece: React.FC<PlanePieceProps> = ({ planeId }) => {
         <div>
           <h4 className={styles.noselect}>Scenes:</h4>
         </div>
-        <div className={styles.flex}></div>
+        <div className={styles.flex}>
+          {scenesIds.map((sceneId) => (
+            <ScenePiece planeId={planeId} sceneId={sceneId} />
+          ))}
+        </div>
       </div>
     </div>
   );
