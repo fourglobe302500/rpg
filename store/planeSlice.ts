@@ -18,12 +18,23 @@ const planeSlice = createSlice({
         name: action.payload,
         id: nextIdArray(state),
         scenes: [],
+        locked: false,
       },
     ],
     deletePlane: (state, action: PayloadAction<number>) =>
-      state.filter((plane) => plane.id !== action.payload),
+      state.filter((plane) => plane.locked || plane.id !== action.payload),
+    togglePlaneLockState: (state, action: PayloadAction<number>) =>
+      state.map((plane) =>
+        plane.id !== action.payload
+          ? plane
+          : { ...plane, locked: !plane.locked },
+      ),
   },
 });
 
-export const { addPlane, deletePlane } = planeSlice.actions;
+export const {
+  addPlane,
+  deletePlane,
+  togglePlaneLockState,
+} = planeSlice.actions;
 export default planeSlice.reducer;

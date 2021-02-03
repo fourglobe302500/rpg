@@ -1,14 +1,14 @@
 import React from "react";
-import { IoMdTrash } from "react-icons/io";
+import { IoIosLock, IoIosUnlock, IoMdTrash } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import ReactTooltip from "react-tooltip";
 import { AppState } from "../store";
-import { deletePlane } from "../store/planeSlice";
+import { deletePlane, togglePlaneLockState } from "../store/planeSlice";
 import styles from "../styles/styles.module.css";
 
 interface PlanePieceProps {
   planeId: number;
 }
+
 export const PlanePiece: React.FC<PlanePieceProps> = ({ planeId }) => {
   const plane = useSelector(
     (state: AppState) =>
@@ -30,43 +30,28 @@ export const PlanePiece: React.FC<PlanePieceProps> = ({ planeId }) => {
         <h2 className={styles.noselect}>
           Name: {plane.name} Id: {plane.id}
         </h2>
-        <IoMdTrash
-          data-tip="React-tooltip"
-          style={{
-            backgroundColor: "red",
-            border: "0px",
-            borderRadius: ".4rem",
-            width: "1.6rem",
-            height: "1.6rem",
-            textAlign: "center",
-            marginLeft: "auto",
-            marginRight: ".5rem",
-          }}
-          onClick={() => dispatch(deletePlane(planeId))}
-        />
-        <ReactTooltip
-          backgroundColor="rgba(0,0,0,0)"
-          border={false}
-          place="top"
-          type="warning"
-          effect="float"
-          className={styles.nopadding}
-          offset={{ bottom: 10 }}
-        >
-          <div
+        {plane.locked ? (
+          <IoIosLock onClick={() => dispatch(togglePlaneLockState(planeId))} />
+        ) : (
+          <IoIosUnlock
+            onClick={() => dispatch(togglePlaneLockState(planeId))}
+          />
+        )}
+        {!plane.locked ? (
+          <IoMdTrash
             style={{
-              backgroundColor: "darkgray",
-              borderRadius: ".5rem",
-              padding: ".5rem",
-              color: "red",
-              fontSize: "1.25rem",
-              fontWeight: "bold",
-              border: "1px solid black",
+              backgroundColor: "red",
+              border: "0px",
+              borderRadius: ".4rem",
+              width: "1.6rem",
+              height: "1.6rem",
+              textAlign: "center",
+              marginLeft: "auto",
+              marginRight: ".5rem",
             }}
-          >
-            Delete
-          </div>
-        </ReactTooltip>
+            onClick={() => dispatch(deletePlane(planeId))}
+          />
+        ) : null}
       </div>
       <div
         style={{

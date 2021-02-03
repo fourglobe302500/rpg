@@ -2,6 +2,7 @@ export interface Plane {
   scenes: Scene[];
   name: string;
   id: number;
+  locked: boolean;
 }
 
 export interface Scene {
@@ -10,6 +11,7 @@ export interface Scene {
   id: number;
   size: Vector2;
   position: Vector2;
+  locked: boolean;
 }
 
 export interface Layer {
@@ -18,6 +20,7 @@ export interface Layer {
   id: number;
   tiles: Tile[][];
   size: Vector2;
+  locked: boolean;
 }
 
 export interface Tile {
