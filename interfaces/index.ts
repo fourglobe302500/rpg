@@ -41,3 +41,8 @@ export interface Vector4<T = number> {
   z: T;
   w: T;
 }
+
+export interface LinkProp {
+  href: string;
+  label: string;
+}

@@ -3,7 +3,12 @@ import { Header } from "../components/Header";
 const IndexPage = () => {
   return (
     <div>
-      <Header></Header>
+      <Header
+        links={[
+          { href: "/game-manager", label: "Game Manager" },
+          { href: "/rpg", label: "Play" },
+        ]}
+      ></Header>
     </div>
   );
 };
