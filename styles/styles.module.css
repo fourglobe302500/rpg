@@ -1,0 +1,25 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+.flex {
+  display: flex;
+}
+.relative {
+  position: relative;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.maxWidth {
+  width: 100%;
+}
+.bg_black {
+  background-color: black;
+}
+.fg_wheat {
+  color: wheat;
+}

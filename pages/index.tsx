@@ -1,5 +1,11 @@
+import { Header } from "../components/Header";
+
 const IndexPage = () => {
-  return <div>Hello There</div>;
+  return (
+    <div>
+      <Header></Header>
+    </div>
+  );
 };
 
 export default IndexPage;
