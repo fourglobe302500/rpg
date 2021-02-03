@@ -1,5 +1,4 @@
 import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
-import { useMemo } from "react";
 import { Plane } from "../interfaces";
 import PlaneSlice from "./planeSlice";
 
@@ -28,8 +27,10 @@ const initializeStore = (preloadedState?: { planes: Plane[] }) => {
 };
 
 export const useStore = (initialState?: { planes: Plane[] }) => {
-  const store = useMemo(() => initializeStore(initialState), [initialState]);
+  const store = initializeStore(initialState);
   return store;
 };
 
-export * from "./planeSlice";
+let __store = useStore();
+export type AppState = ReturnType<typeof __store.getState>;
+export type AppDIspatch = ReturnType<typeof __store.dispatch>;

@@ -2,7 +2,6 @@ export interface Plane {
   scenes: Scene[];
   name: string;
   id: number;
-  size: Vector2;
 }
 
 export interface Scene {

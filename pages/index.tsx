@@ -8,6 +8,7 @@ const IndexPage = () => {
           { href: "/game-manager", label: "Game Manager" },
           { href: "/rpg", label: "Play" },
         ]}
+        mainText="RPG GAME"
       ></Header>
     </div>
   );

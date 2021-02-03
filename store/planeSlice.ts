@@ -3,6 +3,8 @@ import { Plane } from "../interfaces";
 
 const initialState: Plane[] = [];
 
+export type PlanesState = Plane[];
+
 const nextIdArray = <T extends { id: number }>(arr: T[]) =>
   arr.reduce((maxid, item) => Math.max(maxid, item.id), -1) + 1;
 
@@ -16,11 +18,12 @@ const planeSlice = createSlice({
         name: action.payload,
         id: nextIdArray(state),
         scenes: [],
-        size: { x: 0, y: 0 },
       },
     ],
+    deletePlane: (state, action: PayloadAction<number>) =>
+      state.filter((plane) => plane.id !== action.payload),
   },
 });
 
-export const { addPlane } = planeSlice.actions;
+export const { addPlane, deletePlane } = planeSlice.actions;
 export default planeSlice.reducer;
